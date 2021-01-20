@@ -14,7 +14,7 @@ function deepCopy(objectToCopy) {
         //Copy prototype of an element.
         Object.setPrototypeOf(copied, Object.getPrototypeOf(objectToCopy));
     }
-    //Then for each element in given object array we should create copy using recurrence
+    //Then for each element in given object/array we should create copy using recurrence
     for (let key in objectToCopy) {
         copied[key] = deepCopy(objectToCopy[key]);
     }

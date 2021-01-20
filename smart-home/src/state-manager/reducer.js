@@ -1,5 +1,5 @@
-import actionsTypes from '.actionsTypes';
-import {addRoom, removeRoom, toggleRoom } from '.actions';
+import actionsTypes from './actionsTypes';
+import {addRoom, removeRoom, toggleRoom } from './reducerFunctions';
 
 //Reducer for state management. 
 const reducer = (state = [], action) => {
