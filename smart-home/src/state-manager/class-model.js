@@ -12,7 +12,7 @@ class Device {
         this.name = name;
         this.slider = slider; 
         this.isNonToggled = isNonToggled;
-        this.powerOn = false;
+        this.powerOn = true;
         if (this.slider) {
             this.sliderValue = 0;
         }
@@ -64,11 +64,11 @@ class Room {
     toggleRoom() {
         //This function return new Room object with toggled devices. 
         //Devices which can not be switch of from room level are still running. 
-
         return produce (this, draft => {
             if (this.roomSwitchOn) {
                 /*When room is switch on current state is move to previous state
                  and device which can be switch off are switch off. */
+                draft.roomSwitchOn = false;
                 draft.previousState = draft.deviceList;
                 draft.deviceList = draft.deviceList.map(device => {
                     if (device.isNonToggled) {
@@ -77,6 +77,10 @@ class Room {
                         return device.toggleSwitch();
                     }
                 });
+            } else {
+                draft.deviceList =  draft.previousState; 
+                draft.previousState = [];
+                draft.roomSwitchOn = true;
             }
         });
     }
@@ -92,6 +96,8 @@ class Home {
 
         this.owner = owner;
         this.roomList = [];
+
+        this.createDefaultRoom('Living room');
     }
 
     addRoom(roomName) {
@@ -104,9 +110,22 @@ class Home {
 
     removeRoom(roomId) {
         return produce(this, draft => {
-            draft.deviceList.splice(roomId, 1);
+            draft.roomList.splice(roomId, 1);
         });
     }
+
+    createDefaultRoom(name) {
+        //Function to create room example
+        let defaultRoom = new Room(name);
+        let fridge = new Device('fridge', false, true);
+        let lamp = new Device('lamp', true, false);
+
+        defaultRoom.deviceList.push(fridge);
+        defaultRoom.deviceList.push(lamp);
+
+        this.roomList.push(defaultRoom);
+    }
+
 }
 
 export {Home, Room, Device}; 

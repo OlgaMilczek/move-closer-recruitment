@@ -1,18 +1,21 @@
 import actionsTypes from './actionsTypes';
-import {addRoom, removeRoom, toggleRoom } from './reducerFunctions';
+import { produce } from 'immer';
 
 //Reducer for state management. 
-const reducer = (state = [], action) => {
+const reducer = (state, action) => {
     //Switch for different actions on the state. 
     switch (action.type) {
 
     case actionsTypes.ADD_ROOM: 
-        return addRoom(state, action.payload.newRoom);
+        return state.addRoom(action.payload.newRoom);
     case actionsTypes.REMOVE_ROME: 
-        return removeRoom(state, action.payload.removedRoomId);
+        return state.removeRoom(action.payload.removedRoomId);
 
     case actionsTypes.TOGGLE_ROOM: 
-        return toggleRoom(state, action.payload.toggledRoomId);
+        return produce(state, draft => {
+            draft.roomList[action.payload.toggledRoomId] = draft.roomList[action.payload.toggledRoomId].toggleRoom();
+        });
+        
     default:
         return state;
     }
