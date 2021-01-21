@@ -11,12 +11,9 @@ function DeviceInput({ addDevice, isDeviceAdded, setIsDeviceAdd, deviceName, set
 
     const handleClickOutside = (e) => {
         if (cancelInput.current !== null && !cancelInput.current.contains(e.target)) {
-            console.log('');
-            // props.setIsRoomAdd(false);
+            setIsDeviceAdd(false);
         }
     };
-
-
 
     useEffect(() => {
         //Component did mount - add event listener for cancel add device form.
