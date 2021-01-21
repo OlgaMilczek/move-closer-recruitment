@@ -1,13 +1,14 @@
 import { useState } from 'react'; 
 import { Link } from 'react-router-dom';
 
-//Font awsome import for icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+//Components import
+import SwitchSlider from './SwitchSlider';
+import TrashButton from './TrashButton';
+import DeleteMessage from './DeleteMessage';
 
 import './RoomCard.css';
 
-function RoomPage(props) {
+function RoomCard(props) {
     const [roomRemoved, setRoomRemoved] = useState(false);
     const handleToggle = () => {
         props.toggleRoom(props.id);
@@ -15,38 +16,33 @@ function RoomPage(props) {
 
     const deleteRoom = () => {
         props.delRoom(props.id);
+        setRoomRemoved(false);
     };
 
     if (!roomRemoved) {
         return (
-            <div className = 'room'>
-                <Link to={`/room/${props.id}`}>
+            <Link to={`/room/${props.id}`}>
+                <div className = 'room'>
                     <h4 className='room__name'>{props.room.name}</h4>
-                </Link>
-                <p className = 'room__devices'>{props.room.deviceList.length} devices</p>
-                <button className = 'delBtn' onClick = {() => setRoomRemoved(true)}>
-                    <FontAwesomeIcon icon={faTrash}/>
-                </button>
-                <label className="switch">
-                    <input type="checkbox" id="togBtn" onChange ={handleToggle} checked = {props.room.roomSwitchOn}/>
-                    <div className="slider round">
-                        <span className="on">On</span>
-                        <span className="off">Off</span>
+                    <p className = 'room__devices'>{props.room.deviceList.length} devices</p>
+                    <div className = 'room__trash'>
+                        <TrashButton onClick = { () => setRoomRemoved(true) } />
                     </div>
-                </label>
-            </div>
+                    <SwitchSlider toggleAction = {handleToggle} checkedValue = {props.room.roomSwitchOn}/>
+                </div>
+            </Link>
         );
     } else {
         return (
             <div className = 'room'>
-                <p className='room__message' >Are you sure you want to delete this room? </p>
-                <div  className='room__btn-container'>
-                    <button className = 'room__btn' onClick = {deleteRoom}>Yes</button>
-                    <button className = 'room__btn' onClick = {() => setRoomRemoved(false)}>No</button>
-                </div>
+                <DeleteMessage  
+                    deleteAction = {deleteRoom} 
+                    CancelAction = {() => setRoomRemoved(false)} 
+                    elementName = {'room'}
+                />
             </div>
         );
     }
 }
 
-export default RoomPage;
+export default RoomCard;

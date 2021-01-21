@@ -1,24 +1,34 @@
 import {immerable, produce} from 'immer';
 
+import availableDevices from '../available-devices';
+
 //File for class model for state-structure. 
 
 class Device {
 
-    constructor(name, slider, isNonToggled) {
+    constructor(name) {
         /*Device constructor get three arguments name: 
         string, slider: boolean, isNonToggled: boolean
         Divice is immerable class to ensure state immutable*/
+        if (availableDevices[name] === undefined) {
+            throw new Error('No such device!');
+        }
         this[immerable] = true;
-        this.name = name;
-        this.slider = slider; 
-        this.isNonToggled = isNonToggled;
+        this.name = availableDevices[name].name;
+        this.slider = availableDevices[name].slider; 
+        this.isNonToggled = availableDevices[name].isNonToggled;
         this.powerOn = true;
         if (this.slider) {
             this.sliderValue = 0;
+            this.sliderRange = availableDevices[name].sliderRange;
         }
     }
 
     toggleSwitch() {
+        if (this.isNonToggled) {
+            alert('You can\'t turn off this device');
+            return this;
+        }
         return produce(this, draft => {
             draft.powerOn = !draft.powerOn;
         });
@@ -45,9 +55,9 @@ class Room {
         this.previousState = [];
     }
 
-    addDevice(name, slider, isNonToggled) {
+    addDevice(name) {
         //This function return new Room with added device
-        let newDevice = new Device(name, slider, isNonToggled);
+        let newDevice = new Device(name);
 
         return produce(this, draft => {
             draft.deviceList.push(newDevice);
@@ -117,13 +127,23 @@ class Home {
     createDefaultRoom(name) {
         //Function to create room example
         let defaultRoom = new Room(name);
-        let fridge = new Device('fridge', false, true);
-        let lamp = new Device('lamp', true, false);
+        let fridge = new Device('Fridge');
+        let lamp = new Device('Lamp');
+        let TV = new Device('TV');
+        lamp.sliderValue = 80;
+        TV.sliderValue = 30;
+
+        let defaultWC = new Room('Bathroom');
+        let lampWC = new Device('Lamp');
 
         defaultRoom.deviceList.push(fridge);
         defaultRoom.deviceList.push(lamp);
+        defaultRoom.deviceList.push(TV);
+
+        defaultWC.deviceList.push(lampWC);
 
         this.roomList.push(defaultRoom);
+        this.roomList.push(defaultWC);
     }
 
 }

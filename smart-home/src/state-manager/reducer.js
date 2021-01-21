@@ -15,7 +15,29 @@ const reducer = (state, action) => {
         return produce(state, draft => {
             draft.roomList[action.payload.toggledRoomId] = draft.roomList[action.payload.toggledRoomId].toggleRoom();
         });
+
+    case actionsTypes.REMOVE_DEVICE: 
+        return produce(state, draft => {
+            const roomId = action.payload.roomId;
+            const deviceId = action.payload.deviceId;
+            draft.roomList[roomId] =  draft.roomList[roomId].removeDevice(deviceId);
+        });
         
+    case actionsTypes.TOGGLE_DEVICE:
+        return produce(state, draft => {
+            const roomId = action.payload.roomId;
+            const deviceId = action.payload.deviceId;
+            draft.roomList[roomId].deviceList[deviceId] = draft.roomList[roomId].deviceList[deviceId].toggleSwitch();
+        });
+
+    case actionsTypes.SET_SLIDER:
+        return produce(state, draft => {
+            const roomId = action.payload.roomId;
+            const deviceId = action.payload.deviceId;
+            const sliderValue = action.payload.numericValue;
+            draft.roomList[roomId].deviceList[deviceId] = draft.roomList[roomId].deviceList[deviceId].setSliderValue(sliderValue);
+        });
+
     default:
         return state;
     }

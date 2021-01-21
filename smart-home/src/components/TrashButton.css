@@ -1,0 +1,13 @@
+.delBtn {
+    font-size: 1.5rem;
+    border: none;
+    background: none;
+    opacity: .5;
+    transition: all .1s;
+  }
+
+.delBtn:hover,
+.delBtn:active {
+    outline: none;
+    opacity: 0.8;
+}

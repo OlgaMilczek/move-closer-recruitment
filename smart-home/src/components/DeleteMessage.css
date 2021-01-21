@@ -1,0 +1,17 @@
+.delete__message {
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.delete__btn-container {
+    display: flex;
+    justify-content: space-around;
+}
+  
+.delete__btn {
+    background: none;
+    font-weight: bold;
+    border: none;
+    font-size: 1.4rem;
+}

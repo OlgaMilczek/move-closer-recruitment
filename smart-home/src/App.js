@@ -9,7 +9,7 @@ import {publicPath} from './config';
 //Import state managements components. 
 import reducer from './state-manager/reducer';
 import { Home } from './state-manager/class-model';
-import * as actions from './state-manager/actions';
+import * as actions from './actions';
 
 //Import React components. 
 import HomePage from './components/HomePage';
