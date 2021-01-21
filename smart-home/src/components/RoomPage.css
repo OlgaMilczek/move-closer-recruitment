@@ -1,0 +1,28 @@
+.room-side {
+  background-color: var(--color-light-gray);
+  min-height: 100vh;
+}
+
+.room-side__header {
+  padding: 2rem;
+  background-color: var(--color-primary);
+  border-bottom-left-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+  color: var(--color-white);
+}
+
+.room-side__back {
+  font-size: 2rem;
+  color: currentColor;
+  margin-top: 2rem;
+}
+
+.room-side__name {
+  font-size: 3.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.room-side__devices {
+  padding: 3rem;
+}
