@@ -15,6 +15,7 @@ Main state is created as Class Object and is managed by reducer.
 - Removing device (with double confirmation)
 - Toggle device
 - Set value for selected devices with range. 
+- Saving to localStorage. 
 
 ## Installing dependencies
 

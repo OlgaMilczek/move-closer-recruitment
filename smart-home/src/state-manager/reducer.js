@@ -6,6 +6,9 @@ const reducer = (state, action) => {
     //Switch for different actions on the state. 
     switch (action.type) {
 
+    case actionsTypes.SET_STORAGE: 
+        return action.payload.newStorage;
+
     case actionsTypes.ADD_ROOM: 
         return state.addRoom(action.payload.newRoom);
     case actionsTypes.REMOVE_ROME: 

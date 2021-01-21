@@ -1,5 +1,14 @@
 import actionsTypes from './state-manager/actionsTypes'; 
 
+export const setNewStorage = (newStorage) => (
+    {
+        type: actionsTypes.SET_STORAGE, 
+        payload: {
+            newStorage
+        }
+    }
+);
+
 export const addRoomAction = (newRoom) => (
     {
         type: actionsTypes.ADD_ROOM,

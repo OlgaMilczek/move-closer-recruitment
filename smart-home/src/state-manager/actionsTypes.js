@@ -1,4 +1,5 @@
 const actionsTypes = {
+    SET_STORAGE: 'setStorage',
     ADD_ROOM: 'addRoom', 
     REMOVE_ROME: 'removeRoom', 
     TOGGLE_ROOM: 'toggleRoom', 

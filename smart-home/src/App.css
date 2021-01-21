@@ -17,3 +17,9 @@ a:visited {
   margin-left: 1rem;
   margin-right: 1rem;
 }
+
+.loader {
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+}
