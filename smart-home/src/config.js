@@ -1,4 +1,4 @@
 //Config file for setting public path.
-const publicPath = '/';
+const publicPath = '/move-closer-recruitment/';
 
 export {publicPath};
