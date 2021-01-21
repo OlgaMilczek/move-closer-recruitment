@@ -8,27 +8,27 @@ import DeleteMessage from './DeleteMessage';
 
 import './RoomCard.css';
 
-function RoomCard(props) {
+function RoomCard({id, room , toggleRoom, delRoom }) {
     const [roomRemoved, setRoomRemoved] = useState(false);
     const handleToggle = () => {
-        props.toggleRoom(props.id);
+        toggleRoom(id);
     };
 
     const deleteRoom = () => {
-        props.delRoom(props.id);
+        delRoom(id);
         setRoomRemoved(false);
     };
 
     if (!roomRemoved) {
         return (
-            <Link to={`/room/${props.id}`}>
+            <Link to={`/room/${id}`}>
                 <div className = 'room'>
-                    <h4 className='room__name'>{props.room.name}</h4>
-                    <p className = 'room__devices'>{props.room.deviceList.length} devices</p>
+                    <h4 className='room__name'>{ room.name }</h4>
+                    <p className = 'room__devices'>{ room.deviceList.length } devices</p>
                     <div className = 'room__trash'>
                         <TrashButton onClick = { () => setRoomRemoved(true) } />
                     </div>
-                    <SwitchSlider toggleAction = {handleToggle} checkedValue = {props.room.roomSwitchOn}/>
+                    <SwitchSlider toggleAction = {handleToggle} checkedValue = { room.roomSwitchOn }/>
                 </div>
             </Link>
         );

@@ -1,4 +1,5 @@
 import {immerable, produce} from 'immer';
+import { v4 as uuidv4 } from 'uuid';
 
 import availableDevices from '../available-devices';
 
@@ -18,6 +19,7 @@ class Device {
         this.slider = availableDevices[name].slider; 
         this.isNonToggled = availableDevices[name].isNonToggled;
         this.powerOn = true;
+        this.id = uuidv4();
         if (this.slider) {
             this.sliderValue = availableDevices[name].defaultValue;
             this.sliderRange = availableDevices[name].sliderRange;
@@ -25,10 +27,6 @@ class Device {
     }
 
     toggleSwitch() {
-        if (this.isNonToggled) {
-            alert('You can\'t turn off this device');
-            return this;
-        }
         return produce(this, draft => {
             draft.powerOn = !draft.powerOn;
         });
@@ -51,8 +49,8 @@ class Room {
         this.name = name; 
         this.deviceList = [];
         this.roomSwitchOn = true;
-        //this.previousState are use for store previous room configuration after room toggling. 
-        this.previousState = [];
+        //this.previously Power On are use for store previous room configuration after room toggling. 
+        this.previouslyPowerOn = [];
     }
 
     addDevice(name) {
@@ -79,8 +77,10 @@ class Room {
                 /*When room is switch on current state is move to previous state
                  and device which can be switch off are switch off. */
                 draft.roomSwitchOn = false;
-                draft.previousState = draft.deviceList;
+                // Save ids of devices powered on.
+                draft.previouslyPowerOn = draft.deviceList.filter(device => device.powerOn).map(device => device.id);
                 draft.deviceList = draft.deviceList.map(device => {
+                    // Don't turn off if important || or if turned off already
                     if (device.isNonToggled || !device.powerOn) {
                         return device;
                     } else { 
@@ -88,8 +88,15 @@ class Room {
                     }
                 });
             } else {
-                draft.deviceList =  draft.previousState; 
-                draft.previousState = [];
+                draft.deviceList = draft.deviceList.map(device => {
+                    // Don't turn on if turned on && only if was turned on before
+                    if (!device.powerOn && draft.previouslyPowerOn.includes(device.id)) {
+                        return device.toggleSwitch();
+                    } else { 
+                        return device;
+                    }
+                });
+                draft.previouslyPowerOn = [];
                 draft.roomSwitchOn = true;
             }
         });

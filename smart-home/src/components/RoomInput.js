@@ -2,12 +2,12 @@ import { useRef, useEffect } from 'react';
 
 import AddButton from './AddButton';
 
-function RoomInput(props) {
+function RoomInput({setIsRoomAdd, isRoomAdd, setRoomName, roomName, addRoom }) {
     const cancelInput = useRef(null);
 
     const handleClickOutside = (e) => {
         if (cancelInput.current !== null && !cancelInput.current.contains(e.target)) {
-            props.setIsRoomAdd(false);
+            setIsRoomAdd(false);
         }
     };
 
@@ -20,16 +20,16 @@ function RoomInput(props) {
         };
     });
 
-    if (!props.isRoomAdd) {
-        return <AddButton onClick = {() => props.setIsRoomAdd(true)} />;
+    if (!isRoomAdd) {
+        return <AddButton onClick = {() => setIsRoomAdd(true)} />;
     } else {
         return <div className='display__flex' ref={cancelInput}>
             <input 
                 placeholder= 'Enter room name' 
-                onChange = {(e) => props.setRoomName(e.target.value)}
-                value ={props.roomName}
+                onChange = {(e) => setRoomName(e.target.value)}
+                value ={roomName}
             />
-            <AddButton onClick = {props.addRoom} />
+            <AddButton onClick = {addRoom} />
         </div>;
     }
 }

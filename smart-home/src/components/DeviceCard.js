@@ -12,19 +12,19 @@ import availableDevices from '../available-devices';
 //Font awsome import for icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function DeviceCard(props) {
-    const [sliderValue, setSliderValue] = useState(props.device.sliderValue);
+function DeviceCard({device, toggleDevice, setSlider, deleteDevice , id  }) {
+    const [sliderValue, setSliderValue] = useState(device.sliderValue);
     const [deviceRemoved, setDeviceRemoved] = useState(false);
     
     let deviceInfo = null;
     let deviceSlider = null;
 
     const handleToggle = () => {
-        props.toggleDevice(props.id);
+        toggleDevice(id);
     };
 
     const handleSlider = () => {
-        props.setSlider(props.id, sliderValue);
+        setSlider(id, sliderValue);
     };
 
     const handleRangeChange = (e) => {
@@ -32,14 +32,13 @@ function DeviceCard(props) {
         setSliderValue(numericValue);
     };
 
-    const deleteDevice = () => {
+    const deleteThisDevice = () => {
         setDeviceRemoved(false);
-        props.deleteDevice(props.id);
+        deleteDevice( id );
     };
 
-    if (props.device.slider) {
-        const minRange = props.device.sliderRange[0];
-        const maxRange = props.device.sliderRange[1];
+    if (device.slider) {
+        const [minRange, maxRange] = device.sliderRange;
 
         deviceSlider = <div className = 'device-card__slider'>
             <input 
@@ -53,21 +52,21 @@ function DeviceCard(props) {
             />
         </div>;
 
-        const infoText = `${availableDevices[props.device.name].sliderDescription}: 
+        const infoText = `${availableDevices[device.name].sliderDescription}: 
         ${sliderValue} 
-        ${availableDevices[props.device.name].sliderUnits}`;
+        ${availableDevices[device.name].sliderUnits}`;
 
         deviceInfo = <p className ='device-card__detail'>{infoText}</p>;
     }
     if (!deviceRemoved) {
         return (
             <div className ='device-card'>
-                <FontAwesomeIcon icon = {availableDevices[props.device.name].icon} className ='device-card__icon'/>
+                <FontAwesomeIcon icon = {availableDevices[device.name].icon} className ='device-card__icon'/>
                 <div className ='device-card__info'>
-                    <h4 className ='device-card__name'>{props.device.name}</h4>
+                    <h4 className ='device-card__name'>{device.name}</h4>
                     {deviceInfo}
                 </div>
-                <SwitchSlider toggleAction = {handleToggle} checkedValue = {props.device.powerOn}/>
+                <SwitchSlider toggleAction = {handleToggle} checkedValue = {device.powerOn}/>
                 {deviceSlider}
                 <div className = 'device-card__trash'>
                     <TrashButton onClick = {() => setDeviceRemoved(true)} />
@@ -78,7 +77,7 @@ function DeviceCard(props) {
         return (
             <div className = 'device-card__delete'>
                 <DeleteMessage  
-                    deleteAction = {deleteDevice} 
+                    deleteAction = {deleteThisDevice}
                     CancelAction = {() => setDeviceRemoved(false)} 
                     elementName = {'device'}
                 />
