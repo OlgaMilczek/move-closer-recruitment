@@ -23,7 +23,7 @@ function RoomInput(props) {
     if (!props.isRoomAdd) {
         return <AddButton onClick = {() => props.setIsRoomAdd(true)} />;
     } else {
-        return <div className='header__input' ref={cancelInput}>
+        return <div className='display__flex' ref={cancelInput}>
             <input 
                 placeholder= 'Enter room name' 
                 onChange = {(e) => props.setRoomName(e.target.value)}

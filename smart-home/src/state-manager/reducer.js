@@ -16,6 +16,13 @@ const reducer = (state, action) => {
             draft.roomList[action.payload.toggledRoomId] = draft.roomList[action.payload.toggledRoomId].toggleRoom();
         });
 
+    case actionsTypes.ADD_DEVICE: 
+        return produce(state, draft => {
+            const roomId = action.payload.roomId;
+            const deviceName = action.payload.deviceName;
+            draft.roomList[roomId] =  draft.roomList[roomId].addDevice(deviceName);
+        });
+
     case actionsTypes.REMOVE_DEVICE: 
         return produce(state, draft => {
             const roomId = action.payload.roomId;

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Link } from 'react-router-dom';
 
 import * as actions from '../actions';
@@ -6,10 +8,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import DeviceCard from './DeviceCard';
+import DeviceInput from './DeviceInput';
 
 import './RoomPage.css';
 
 function RoomPage({ match }, homeState, dispatch) {
+    const [isDeviceAdded, setIsDeviceAdded] = useState(false);
+    const [deviceName, setDeviceName] = useState('');
+
     const currentRoomId = Number(match.params.id);
     const currentRoom = homeState.roomList[currentRoomId];
 
@@ -18,6 +24,16 @@ function RoomPage({ match }, homeState, dispatch) {
             throw new Error('Device id should be typ of number');
         }
         dispatch(actions.deleteDeviceAction(currentRoomId, deviceId));
+    };
+
+    const addDevice = () => {
+        if (deviceName === '') {
+            alert('Enter room name');
+        } else {
+            setIsDeviceAdded(false);
+            dispatch(actions.addDeviceAction(currentRoomId, deviceName));
+            setDeviceName('');
+        }
     };
 
     const toggleDevice = (deviceId) => {
@@ -48,14 +64,23 @@ function RoomPage({ match }, homeState, dispatch) {
     });
 
     return (
-        <div className ='room-side'>
-            <div className ='room-side__header'>
-                <Link to='/' className ='room-side__back'>
+        <div className ='room-page'>
+            <div className ='room-page__header'>
+                <Link to='/' className ='room-page__back'>
                     <FontAwesomeIcon icon = {faArrowLeft} />
                 </Link>
-                <h3 className ='room-side__name'>{currentRoom.name}</h3>
+                <h3 className ='room-page__name'>{currentRoom.name}</h3>
+                <div className='room-page__header__add'>
+                    <DeviceInput 
+                        addDevice = {addDevice} 
+                        isDeviceAdded ={isDeviceAdded}
+                        setIsDeviceAdd={setIsDeviceAdded}
+                        deviceName = {deviceName}
+                        setDeviceName ={setDeviceName}
+                    />
+                </div>
             </div>
-            <div className ='room-side__devices'>
+            <div className ='room-page__devices'>
                 {devicesContainers}
             </div>
 

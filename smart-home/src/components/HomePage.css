@@ -2,11 +2,11 @@
   padding: 2rem;
 }
 
-.header {
+.home-page__header {
   position: relative;
 }
 
-.header__user-photo {
+.home-page__header__user-photo {
   width: 3.5rem;
   border-radius: 50%;
   margin-bottom: 1.5rem;
@@ -21,7 +21,7 @@
   font-size: 1.2rem;
 }
 
-.header__add {
+.home-page__header__add {
   position: absolute;
   top: 0;
   right: 0;
@@ -31,10 +31,6 @@
   background-color: var(--color-primary-light);
   transition: all .2s;
   padding: 1rem;
-}
-
-.header__input {
-  display: flex;
 }
 
 input {
@@ -50,21 +46,6 @@ input:active,
 input:focus {
   outline: none;
   opacity: 1;
-}
-
-.header__button {
-  border: none;
-  font-size: 1.8rem;
-  color: var(--color-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-}
-
-.header__button:hover {
-  outline:none;
-  color: var(--color-primary-dark);
 }
 
 .rooms-container {

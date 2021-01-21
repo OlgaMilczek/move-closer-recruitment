@@ -1,0 +1,14 @@
+.add__button{
+    border: none;
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+}
+  
+.add__button:hover {
+    outline:none;
+    color: var(--color-primary-dark);
+}

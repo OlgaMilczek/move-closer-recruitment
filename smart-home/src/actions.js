@@ -38,6 +38,16 @@ export const deleteDeviceAction = (roomId , deviceId) => (
     }
 );
 
+export const addDeviceAction = (roomId , deviceName) => (
+    {
+        type: actionsTypes.ADD_DEVICE,
+        payload: {
+            roomId,
+            deviceName
+        }
+    }
+);
+
 export const toggleDeviceAction = (roomId, deviceId) => (
     {
         type: actionsTypes.TOGGLE_DEVICE,

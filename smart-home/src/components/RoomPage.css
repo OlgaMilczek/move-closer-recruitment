@@ -1,28 +1,51 @@
-.room-side {
+.room-page {
   background-color: var(--color-light-gray);
   min-height: 100vh;
 }
 
-.room-side__header {
+.room-page__header {
   padding: 2rem;
   background-color: var(--color-primary);
   border-bottom-left-radius: 3rem;
   border-bottom-right-radius: 3rem;
   color: var(--color-white);
+  position: relative;
 }
 
-.room-side__back {
+.room-page__back {
   font-size: 2rem;
   color: currentColor;
   margin-top: 2rem;
 }
 
-.room-side__name {
+.room-page__name {
   font-size: 3.5rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
-.room-side__devices {
+.room-page__devices {
   padding: 3rem;
+}
+
+.room-page__header__add {
+  position: absolute;
+  top: 8.5rem;
+  right: 3rem;
+  box-shadow: var(--shadow);
+  border-radius: 100rem;
+  font-size: 1.4rem;
+  background-color: var(--color-primary-light);
+  transition: all .2s;
+  padding: 1rem;
+}
+
+select {
+  border: none;
+  background-color: var(--color-white);
+}
+
+select:hover, 
+select:active {
+  outline: none;
 }

@@ -24,7 +24,7 @@ const availableDevices = {
         isNonToggled: false,
         icon: faWind,
         sliderDescription: 'Temperature',
-        sliderUnits: '&deg;',
+        sliderUnits: '\u00B0C',
         sliderRange: [16, 30],
     },
 
