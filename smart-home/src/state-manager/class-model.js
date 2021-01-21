@@ -81,9 +81,9 @@ class Room {
                 draft.roomSwitchOn = false;
                 draft.previousState = draft.deviceList;
                 draft.deviceList = draft.deviceList.map(device => {
-                    if (device.isNonToggled) {
+                    if (device.isNonToggled || !device.powerOn) {
                         return device;
-                    } else {
+                    } else { 
                         return device.toggleSwitch();
                     }
                 });
