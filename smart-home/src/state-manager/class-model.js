@@ -9,7 +9,7 @@ class Device {
     constructor(name) {
         /*Device constructor get three arguments name: 
         string, slider: boolean, isNonToggled: boolean
-        Divice is immerable class to ensure state immutable*/
+        Device is immerable class to ensure state immutable*/
         if (availableDevices[name] === undefined) {
             throw new Error('No such device!');
         }
@@ -19,7 +19,7 @@ class Device {
         this.isNonToggled = availableDevices[name].isNonToggled;
         this.powerOn = true;
         if (this.slider) {
-            this.sliderValue = 0;
+            this.sliderValue = availableDevices[name].defaultValue;
             this.sliderRange = availableDevices[name].sliderRange;
         }
     }
@@ -130,8 +130,6 @@ class Home {
         let fridge = new Device('Fridge');
         let lamp = new Device('Lamp');
         let TV = new Device('TV');
-        lamp.sliderValue = 80;
-        TV.sliderValue = 30;
 
         let defaultWC = new Room('Bathroom');
         let lampWC = new Device('Lamp');

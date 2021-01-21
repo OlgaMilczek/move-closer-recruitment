@@ -9,6 +9,7 @@ const availableDevices = {
         sliderDescription: 'Brightness',
         sliderUnits: '%',
         sliderRange: [0, 100],
+        defaultValue: 50
     },
 
     Fridge: {
@@ -26,6 +27,7 @@ const availableDevices = {
         sliderDescription: 'Temperature',
         sliderUnits: '\u00B0C',
         sliderRange: [16, 30],
+        defaultValue: 20
     },
 
     TV: {
@@ -36,6 +38,7 @@ const availableDevices = {
         sliderDescription: 'Volume',
         sliderUnits: '%',
         sliderRange: [0, 100],
+        defaultValue: 30
     }
 };
 
