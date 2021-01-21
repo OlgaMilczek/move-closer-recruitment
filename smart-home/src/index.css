@@ -31,3 +31,23 @@ body {
     sans-serif;
   background-color: var(--color-primary);
 }
+
+@media only screen and (min-width: 900px) {
+  html {
+    font-size: 70%;
+  }
+  
+  body {
+    background: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary));
+  }
+  
+  #root {
+    max-width: 800px;
+    margin: auto; 
+    min-height: calc(100vh - 5rem - 5rem);
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    box-shadow: 0 0 3rem rgba(0, 0, 0, .3);
+    background-color: var(--color-primary);
+  }
+}
