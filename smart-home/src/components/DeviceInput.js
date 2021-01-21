@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';  
 
+//Import React components. 
 import AddButton from './AddButton';
 
 import availableDevices from '../available-devices';
@@ -24,7 +25,7 @@ function DeviceInput({ addDevice, isDeviceAdded, setIsDeviceAdd, deviceName, set
         };
     });
 
-    const defaultOptionValue = <option value="" key = {0} disabled = {true} hidden = {true}>Choose device</option>;
+    const defaultOptionValue = <option value="" key = {0} disabled = {true} >Choose device</option>;
     deviceOption.push(defaultOptionValue);
 
     for (let propName in availableDevices) {
@@ -37,7 +38,7 @@ function DeviceInput({ addDevice, isDeviceAdded, setIsDeviceAdd, deviceName, set
         return <AddButton onClick = {() => setIsDeviceAdd(true)} />;
     } else {
         return <div className='display__flex' ref={cancelInput}>
-            <select className='margin-left-right-1' onChange = {(e) => setDeviceName(e.target.value)}>
+            <select className='margin-left-right-1' value = {deviceName} onChange = {(e) => setDeviceName(e.target.value)}>
                 {deviceOption}
             </select>
             <AddButton onClick = {() => addDevice(deviceName)} />

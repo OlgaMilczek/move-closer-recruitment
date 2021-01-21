@@ -7,8 +7,8 @@ import availableDevices from '../available-devices';
 class Device {
 
     constructor(name) {
-        /*Device constructor get three arguments name: 
-        string, slider: boolean, isNonToggled: boolean
+        /*Device constructor get one arguments name: 
+        string, rest of arguments are taken from availableDevices file.
         Device is immerable class to ensure state immutable*/
         if (availableDevices[name] === undefined) {
             throw new Error('No such device!');
@@ -126,6 +126,7 @@ class Home {
 
     createDefaultRoom(name) {
         //Function to create room example
+        //Can be only run by constructor.
         let defaultRoom = new Room(name);
         let fridge = new Device('Fridge');
         let lamp = new Device('Lamp');

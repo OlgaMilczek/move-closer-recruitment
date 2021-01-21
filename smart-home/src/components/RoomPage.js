@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { Link } from 'react-router-dom';
 
 import * as actions from '../actions';
@@ -7,6 +6,7 @@ import * as actions from '../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
+//Import React components. 
 import DeviceCard from './DeviceCard';
 import DeviceInput from './DeviceInput';
 
@@ -28,7 +28,7 @@ function RoomPage({ match }, homeState, dispatch) {
 
     const addDevice = () => {
         if (deviceName === '') {
-            alert('Enter room name');
+            alert('Enter device name');
         } else {
             setIsDeviceAdded(false);
             dispatch(actions.addDeviceAction(currentRoomId, deviceName));
