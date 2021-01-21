@@ -4,7 +4,7 @@ This project is made as a part of a recruitment task.
 It was created with ReactJS with React Router (bootstrapped with [Create React App](https://github.com/facebook/create-react-app)).  
 Main state is created as Class Object and is managed by reducer.
 
-[Live preview](https://github.com/facebook/create-react-app)
+[Live preview](https://olgamilczek.github.io/move-closer-recruitment/)
 
 ## Functionalities
 
